@@ -77,11 +77,12 @@ export default function SearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            id="restoreHideTickets"
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={() => props.filterTickets('')}
+            onClick={() => props.restoreHidden()}
           >
             <RestoreIcon />
           </IconButton>

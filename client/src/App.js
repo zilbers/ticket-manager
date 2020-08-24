@@ -24,6 +24,13 @@ function App() {
     setHiddenTickets(currentHidden);
     setTickets(currentShowing);
   }
+
+  function restoreHidden() {
+    const restoredTickets = tickets.concat(hiddenTickets);
+    setHiddenTickets([]);
+    setTickets(restoredTickets);
+  }
+
   // Translates creation time to date string
   function timeAndDate(creationTime) {
     const day = new Date(creationTime);
@@ -57,6 +64,7 @@ function App() {
           hiddenTickets={hiddenTickets}
           tickets={tickets}
           filterTickets={(stringFilter) => filterTickets(stringFilter)}
+          restoreHidden={restoreHidden}
         />
       )}
       <main id="ticketsShow">
