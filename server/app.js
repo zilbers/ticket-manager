@@ -1,4 +1,5 @@
 const express = require('express');
+const { query } = require('express');
 const fs = require('fs').promises;
 
 const app = express();
@@ -27,7 +28,11 @@ app.get('/api/tickets', async (req, res) => {
     let json = JSON.parse(content);
     if (req.query.searchText) {
       console.log('Query: ', req.query);
-      json = json.filter((ticket) => ticket.title.includes(req.query.searchText));
+      json = json.filter((ticket) => {
+        const title = ticket.title.toLowerCase();
+        const searchQuery = req.query.searchText.toLowerCase();
+        return title.includes(searchQuery);
+      });
     }
     res.send(json);
   } catch (error) {
