@@ -8,9 +8,6 @@ function App() {
   // Gets ticket from server
   const [tickets, setTickets] = useState();
 
-  // List of filtered tickets
-  const [filteredTickets, setFilteredTickets] = useState();
-
   // Translates creation time to date string
   function timeAndDate(creationTime) {
     const day = new Date(creationTime);
@@ -20,23 +17,16 @@ function App() {
   }
 
   // Filters the showing tickets
-  function filterTickets(searchQuery) {
-    const filteredList = [];
-    tickets.forEach((item) => {
-      const ticketTitle = item.title.toLowerCase();
-      if (ticketTitle.includes(searchQuery.toLowerCase())
-      || item.id.includes(searchQuery.toLowerCase())) {
-        filteredList.push(item);
-      }
-    });
-    console.log(filteredList);
-    setFilteredTickets(filteredList);
+  async function filterTickets(searchQuery) {
+    const result = await axios.get(`/api/tickets?searchText=${searchQuery}`).then((res) => res);
+    console.log(result.data);
+    setTickets(result.data);
   }
 
   // Shows the unfiltered list
-  function unFilter() {
-    setFilteredTickets(tickets.slice());
-  }
+  // function unFilter() {
+  //   setFilteredTickets(tickets.slice());
+  // }
 
   // Loads the tickets when recieved from server
   useEffect(() => {
@@ -48,19 +38,13 @@ function App() {
     fetchData();
   }, []);
 
-  // Sets filteredTickets with the data on tickets
-  useEffect(() => {
-    setFilteredTickets(tickets);
-  }, [tickets]);
-
   return (
     <>
       <Search
-        setFilteredTickets={setFilteredTickets}
         filterTickets={(stringFilter) => filterTickets(stringFilter)}
       />
       <main id="ticketsShow">
-        {filteredTickets && filteredTickets.map((ticket) => (
+        {tickets && tickets.map((ticket) => (
           <Ticket
             key={ticket.id}
             ticket={ticket}
