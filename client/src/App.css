@@ -6,8 +6,5 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#searchAppBar {
-    position: sticky;
+    margin-top: 13%;
 }

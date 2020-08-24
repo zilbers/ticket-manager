@@ -34,3 +34,13 @@
     padding: 3px;
     margin-right: 10px;
 }
+
+.hideTicketButton {
+    margin-right: 5px;
+    float: right;
+}
+
+.hideTicketButton:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+}

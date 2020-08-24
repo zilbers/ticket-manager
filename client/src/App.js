@@ -8,6 +8,22 @@ function App() {
   // Gets ticket from server
   const [tickets, setTickets] = useState();
 
+  //  Array of all the hidden tickets
+  const [hiddenTickets, setHiddenTickets] = useState([]);
+
+  // Hides tickets from view
+  function hideTicket(ticket) {
+    const currentHidden = hiddenTickets.slice();
+    const currentShowing = tickets.slice();
+    currentHidden.push(ticket);
+    const index = currentShowing.indexOf(ticket);
+    if (index > -1) {
+      currentShowing.splice(index, 1);
+    }
+    console.log(currentHidden);
+    setHiddenTickets(currentHidden);
+    setTickets(currentShowing);
+  }
   // Translates creation time to date string
   function timeAndDate(creationTime) {
     const day = new Date(creationTime);
@@ -35,12 +51,17 @@ function App() {
 
   return (
     <>
-      <SearchAppBar filterTickets={(stringFilter) => filterTickets(stringFilter)} />
+      <SearchAppBar
+        hiddenTickets={hiddenTickets}
+        tickets={tickets}
+        filterTickets={(stringFilter) => filterTickets(stringFilter)}
+      />
       <main id="ticketsShow">
         {tickets && tickets.map((ticket) => (
           <Ticket
             key={ticket.id}
             ticket={ticket}
+            hideTicket={hideTicket}
             timeAndDate={(creationTime) => timeAndDate(creationTime)}
           />
         ))}

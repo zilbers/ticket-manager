@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Label from './Label';
 import Info from './Info';
 import './Ticket.css';
 
 function Ticket(props) {
+  const [hideButton, setHideButton] = useState(true);
   const { ticket } = props;
+
   return (
-    <div className="ticket">
+    <div
+      className="ticket"
+      onMouseEnter={() => setHideButton(false)}
+      onMouseLeave={() => setHideButton(true)}
+    >
+      <span
+        className="hideTicketButton"
+        hidden={hideButton}
+        onClick={() => props.hideTicket(ticket)}
+      >
+        Hide
+      </span>
       <div className="body">
         <h4 className="title">{ticket.title}</h4>
         <p className="content">{ticket.content}</p>

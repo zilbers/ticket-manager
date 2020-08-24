@@ -5,12 +5,17 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
+import FilterVintageIcon from '@material-ui/icons/FilterVintage';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    zIndex: 5,
+    position: 'fixed',
+    width: '100%',
+    top: 0,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -67,7 +72,7 @@ export default function SearchAppBar(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} id="searchAppBar">
+    <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -76,10 +81,17 @@ export default function SearchAppBar(props) {
             color="inherit"
             aria-label="open drawer"
           >
-            {/* <MenuIcon /> */}
+            <FilterVintageIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Tickets - Manager
+            {' '}
+            <span id="counter">
+              Hidden:
+              <span id="hideTicketsCounter">
+                {props.hiddenTickets.length}
+              </span>
+            </span>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
