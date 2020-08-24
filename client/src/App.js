@@ -20,12 +20,14 @@ function App() {
     if (index > -1) {
       currentShowing.splice(index, 1);
     }
-    console.log(currentHidden);
+    console.log('Hiding ticket: ', currentHidden);
     setHiddenTickets(currentHidden);
     setTickets(currentShowing);
   }
 
+  // Combines hidden and presented tickets
   function restoreHidden() {
+    console.log('Rrestoring tickets');
     const restoredTickets = tickets.concat(hiddenTickets);
     setHiddenTickets([]);
     setTickets(restoredTickets);
@@ -42,7 +44,7 @@ function App() {
   // Filters the showing tickets
   async function filterTickets(searchQuery) {
     const result = await axios.get(`/api/tickets?searchText=${searchQuery}`).then((res) => res);
-    console.log(result.data);
+    console.log(`Filter result by "${searchQuery}": `, result.data);
     setHiddenTickets([]);
     setTickets(result.data);
   }
@@ -51,7 +53,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get('/api/tickets');
-      console.log(result.data);
+      console.log('Loading tickets from server: ', result.data);
       setTickets(result.data);
     };
     fetchData();
