@@ -20,7 +20,7 @@ Method: ${req.method}`);
 }
 app.use(logger);
 
-//  Entry point that replies with the data of all the tickets saved
+// Replies with searched tickets
 app.get('/api/tickets', async (req, res) => {
   try {
     const content = await fs.readFile('./data.json');
