@@ -2,9 +2,8 @@ const express = require('express');
 const fs = require('fs').promises;
 
 const app = express();
-let requestID = 0;
-
 module.exports = app;
+let requestID = 0;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,7 +21,7 @@ Request #${requestID}
 app.use(logger);
 
 //  Entry point that replies with the data of all the tickets saved
-app.get('api/tickets/', async (req, res) => {
+app.get('/api/tickets', async (req, res) => {
   try {
     const content = await fs.readFile('./data.json');
     const json = JSON.parse(content);
