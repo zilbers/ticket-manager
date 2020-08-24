@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Ticket from './components/Ticket';
-import Search from './components/Search';
+import SearchAppBar from './components/SearchAppBar';
 import './App.css';
 
 function App() {
@@ -23,11 +23,6 @@ function App() {
     setTickets(result.data);
   }
 
-  // Shows the unfiltered list
-  // function unFilter() {
-  //   setFilteredTickets(tickets.slice());
-  // }
-
   // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +35,7 @@ function App() {
 
   return (
     <>
-      <Search
-        filterTickets={(stringFilter) => filterTickets(stringFilter)}
-      />
+      <SearchAppBar filterTickets={(stringFilter) => filterTickets(stringFilter)} />
       <main id="ticketsShow">
         {tickets && tickets.map((ticket) => (
           <Ticket
