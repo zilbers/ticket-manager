@@ -24,7 +24,7 @@ function Ticket(props) {
         <IconButton
           edge="start"
           color="inherit"
-          aria-label="open drawer"
+          aria-label="hide ticket"
           className="hideTicketButton"
           onClick={() => props.hideTicket(ticket)}
         >
