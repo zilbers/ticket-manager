@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Ticket from './components/Ticket';
+import Search from './components/Search';
 import './App.css';
 
 function App() {
   // Gets ticket from server
   const [tickets, setTickets] = useState();
+
+  // List of filtered tickets
+  const [filteredTickets, setFilteredTickets] = useState();
 
   // Translates creation time to date string
   function timeAndDate(creationTime) {
@@ -15,6 +19,25 @@ function App() {
     return `${date}, ${time}`;
   }
 
+  // Filters the showing tickets
+  function filterTickets(searchQuery) {
+    const filteredList = [];
+    filteredTickets.forEach((item, i) => {
+      const ticketTitle = item.title.toLowerCase();
+      if (ticketTitle.includes(searchQuery.toLowerCase())) {
+        filteredList.push(item);
+      }
+    });
+    console.log(filteredList);
+    setFilteredTickets(filteredList);
+  }
+
+  // Shows the unfiltered list
+  function unFilter() {
+    setFilteredTickets(tickets.slice());
+  }
+
+  // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get('/api/tickets');
@@ -24,16 +47,23 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setFilteredTickets(tickets);
+  }, [tickets]);
+
   return (
-    <main id="ticketsShow">
-      {tickets && tickets.map((ticket) => (
-        <Ticket
-          key={ticket.id}
-          ticket={ticket}
-          timeAndDate={(creationTime) => timeAndDate(creationTime)}
-        />
-      ))}
-    </main>
+    <>
+      <Search filterTickets={(stringFilter) => filterTickets(stringFilter)} />
+      <main id="ticketsShow">
+        {filteredTickets && filteredTickets.map((ticket) => (
+          <Ticket
+            key={ticket.id}
+            ticket={ticket}
+            timeAndDate={(creationTime) => timeAndDate(creationTime)}
+          />
+        ))}
+      </main>
+    </>
   );
 }
 
