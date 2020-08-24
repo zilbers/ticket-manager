@@ -55,7 +55,10 @@ function App() {
 
   return (
     <>
-      <Search filterTickets={(stringFilter) => filterTickets(stringFilter)} />
+      <Search
+        setFilteredTickets={setFilteredTickets}
+        filterTickets={(stringFilter) => filterTickets(stringFilter)}
+      />
       <main id="ticketsShow">
         {filteredTickets && filteredTickets.map((ticket) => (
           <Ticket
