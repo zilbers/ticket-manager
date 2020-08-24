@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   return (
-    <main>
+    <main id="ticketsShow">
       {tickets && tickets.map((ticket) => (
         <Ticket
           key={ticket.id}

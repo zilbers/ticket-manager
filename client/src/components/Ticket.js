@@ -13,7 +13,7 @@ function Ticket(props) {
       </div>
       <div className="infoAboutTicket">
         <Info userEmail={ticket.userEmail} timeAndDate={props.timeAndDate(ticket.creationTime)} />
-        <div className="labels">
+        <div className="labelContainer">
           {' '}
           {ticket.labels && ticket.labels.map((label) => (
             <Label
