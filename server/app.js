@@ -26,7 +26,7 @@ app.get('/api/tickets', async (req, res) => {
     const content = await fs.readFile('./data.json');
     let json = JSON.parse(content);
     if (req.query.searchText) {
-      console.log('Query: ', req.query);
+      console.log('Route param: ', req.query);
       json = json.filter((ticket) => {
         const title = ticket.title.toLowerCase();
         const searchQuery = req.query.searchText.toLowerCase();
@@ -45,7 +45,8 @@ app.post('/api/tickets/:ticketId/done', async (req, res) => {
     const content = await fs.readFile('./data.json');
     const json = JSON.parse(content);
     const { ticketId } = req.params;
-    console.log('Query params: ', req.params);
+    console.log('Query param: ', req.params);
+    console.log('Done', true);
     json.forEach((ticket, index) => {
       if (ticket.id === ticketId) {
         json[index].done = true;
@@ -64,7 +65,8 @@ app.post('/api/tickets/:ticketId/undone', async (req, res) => {
     const content = await fs.readFile('./data.json');
     const json = JSON.parse(content);
     const { ticketId } = req.params;
-    console.log('Query params: ', req.params);
+    console.log('Query param: ', req.params);
+    console.log('Done', false);
     json.forEach((ticket, index) => {
       if (ticket.id === ticketId) {
         json[index].done = false;
