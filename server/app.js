@@ -1,5 +1,4 @@
 const express = require('express');
-const { query } = require('express');
 const fs = require('fs').promises;
 
 const app = express();
@@ -35,6 +34,44 @@ app.get('/api/tickets', async (req, res) => {
       });
     }
     res.send(json);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+// Marks ticket as done
+app.post('/api/tickets/:ticketId/done', async (req, res) => {
+  try {
+    const content = await fs.readFile('./data.json');
+    const json = JSON.parse(content);
+    const { ticketId } = req.params;
+    console.log('Query params: ', req.params);
+    json.forEach((ticket, index) => {
+      if (ticket.id === ticketId) {
+        json[index].done = true;
+      }
+    });
+    await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
+    res.send('Updated');
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+// Marks ticket as undone
+app.post('/api/tickets/:ticketId/undone', async (req, res) => {
+  try {
+    const content = await fs.readFile('./data.json');
+    const json = JSON.parse(content);
+    const { ticketId } = req.params;
+    console.log('Query params: ', req.params);
+    json.forEach((ticket, index) => {
+      if (ticket.id === ticketId) {
+        json[index].done = false;
+      }
+    });
+    await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
+    res.send('Updated ticket');
   } catch (error) {
     res.send(error);
   }
