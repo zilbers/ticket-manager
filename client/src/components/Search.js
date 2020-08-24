@@ -5,7 +5,7 @@ export default function Search(props) {
   return (
     <div id="searchArea">
       <input
-        id="filter"
+        id="searchInput"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <button

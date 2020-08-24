@@ -22,9 +22,10 @@ function App() {
   // Filters the showing tickets
   function filterTickets(searchQuery) {
     const filteredList = [];
-    filteredTickets.forEach((item, i) => {
+    tickets.forEach((item) => {
       const ticketTitle = item.title.toLowerCase();
-      if (ticketTitle.includes(searchQuery.toLowerCase())) {
+      if (ticketTitle.includes(searchQuery.toLowerCase())
+      || item.id.includes(searchQuery.toLowerCase())) {
         filteredList.push(item);
       }
     });
@@ -47,6 +48,7 @@ function App() {
     fetchData();
   }, []);
 
+  // Sets filteredTickets with the data on tickets
   useEffect(() => {
     setFilteredTickets(tickets);
   }, [tickets]);
