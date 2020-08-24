@@ -74,6 +74,7 @@ app.post('/api/tickets/:ticketId/undone', async (req, res) => {
       if (ticket.id === ticketId) {
         json[index].done = false;
         responseJson = json[index];
+        responseJson.updated = true;
       }
     });
     await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
