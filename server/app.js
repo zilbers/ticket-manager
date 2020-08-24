@@ -7,15 +7,15 @@ let requestID = 0;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use('/', express.static('../client/build/'));
+app.use('/', express.static('../client/build/'));
 
 // Logger that describes activity on the server
 function logger(req, res, next) {
-  requestID += 1;
-  console.log(`Request fired: ${req.url} 
-Method: ${req.method}
+  console.log(`
 Request #${requestID}
-`);
+Request fired: ${req.url} 
+Method: ${req.method}`);
+  requestID += 1;
   next();
 }
 app.use(logger);
@@ -25,6 +25,9 @@ app.get('/api/tickets', async (req, res) => {
   try {
     const content = await fs.readFile('./data.json');
     const json = JSON.parse(content);
+    if (req.query.searchText) {
+      console.log('Query: ', req.query);
+    }
     res.send(json);
   } catch (error) {
     res.send(error);
