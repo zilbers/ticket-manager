@@ -1,9 +1,9 @@
 .ticket {
     background: #d9d9d9dc;
     margin-bottom: 10px;
-    padding: 1px;
-    border-radius: 1.5%;
-    width: 90%;
+    border-radius: 2%;
+    width: 85%;
+    overflow: hidden
 }
 
 .body {
@@ -26,7 +26,7 @@
 
 .label{
     color: #ffffff;
-    background: #284b63;
+    background: #e63946;
     display: flex;
     justify-content: center;
     align-content: center;
