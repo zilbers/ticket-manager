@@ -24,9 +24,10 @@ app.use(logger);
 app.get('/api/tickets', async (req, res) => {
   try {
     const content = await fs.readFile('./data.json');
-    const json = JSON.parse(content);
+    let json = JSON.parse(content);
     if (req.query.searchText) {
       console.log('Query: ', req.query);
+      json = json.filter((ticket) => ticket.title.includes(req.query.searchText));
     }
     res.send(json);
   } catch (error) {
