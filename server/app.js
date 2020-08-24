@@ -47,13 +47,15 @@ app.post('/api/tickets/:ticketId/done', async (req, res) => {
     const { ticketId } = req.params;
     console.log('Query param: ', req.params);
     console.log('Done', true);
+    let responseJson;
     json.forEach((ticket, index) => {
       if (ticket.id === ticketId) {
         json[index].done = true;
+        responseJson = json[index];
       }
     });
     await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
-    res.send('Updated');
+    res.send(responseJson);
   } catch (error) {
     res.send(error);
   }
