@@ -36,6 +36,7 @@ function App() {
   async function filterTickets(searchQuery) {
     const result = await axios.get(`/api/tickets?searchText=${searchQuery}`).then((res) => res);
     console.log(result.data);
+    setHiddenTickets([]);
     setTickets(result.data);
   }
 
@@ -51,11 +52,13 @@ function App() {
 
   return (
     <>
-      <SearchAppBar
-        hiddenTickets={hiddenTickets}
-        tickets={tickets}
-        filterTickets={(stringFilter) => filterTickets(stringFilter)}
-      />
+      { tickets && (
+        <SearchAppBar
+          hiddenTickets={hiddenTickets}
+          tickets={tickets}
+          filterTickets={(stringFilter) => filterTickets(stringFilter)}
+        />
+      )}
       <main id="ticketsShow">
         {tickets && tickets.map((ticket) => (
           <Ticket

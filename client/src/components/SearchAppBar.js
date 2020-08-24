@@ -8,6 +8,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 // import MenuIcon from '@material-ui/icons/Menu';
 import FilterVintageIcon from '@material-ui/icons/FilterVintage';
 import SearchIcon from '@material-ui/icons/Search';
+import RestoreIcon from '@material-ui/icons/Restore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,19 +81,34 @@ export default function SearchAppBar(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => props.filterTickets('')}
           >
-            <FilterVintageIcon />
+            <RestoreIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Tickets - Manager
             {' '}
-            <span id="counter">
-              Hidden:
+          </Typography>
+          <div id="counters">
+            <span id="showingCounter">
+              Showing
+              {' '}
+              <span id="showTicketsCounter">
+                {props.tickets.length}
+              </span>
+              {' '}
+              results
+              {' '}
+            </span>
+            <span id="hiddenCounter">
+              (
               <span id="hideTicketsCounter">
                 {props.hiddenTickets.length}
               </span>
+              {' '}
+              hidden tickets)
             </span>
-          </Typography>
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
