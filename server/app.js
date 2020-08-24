@@ -69,13 +69,15 @@ app.post('/api/tickets/:ticketId/undone', async (req, res) => {
     const { ticketId } = req.params;
     console.log('Query param: ', req.params);
     console.log('Done', false);
+    let responseJson;
     json.forEach((ticket, index) => {
       if (ticket.id === ticketId) {
         json[index].done = false;
+        responseJson = json[index];
       }
     });
     await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
-    res.send('Updated ticket');
+    res.send(responseJson);
   } catch (error) {
     res.send(error);
   }
