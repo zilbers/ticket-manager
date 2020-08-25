@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  form: {
+    display: 'flex',
+    border: 'none',
+  },
 }));
 
 export default function TransitionsModal(props) {
@@ -59,9 +63,17 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <form>
-              <h3 id="add-comment-title">Transition modal</h3>
-
+            <form id="addTicketForm" action="/action_page.php" method="post">
+              <fieldset id="ticketFieldSet" className={classes.form}>
+                <h3 id="add-ticket-title">Add ticket</h3>
+                <label htmlFor="userEmail">Email:</label>
+                <input type="email" id="userEmail" name="userEmail" />
+                <label htmlFor="title">Title:</label>
+                <input type="text" id="title" name="title" />
+                <label htmlFor="content">Cotent:</label>
+                <textarea name="content" rows="10" cols="50" />
+                <input type="submit" value="Submit" />
+              </fieldset>
             </form>
           </div>
         </Fade>

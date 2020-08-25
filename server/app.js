@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs').promises;
+const { uuid } = require('uuidv4');
 
 const app = express();
 module.exports = app;
@@ -79,6 +80,23 @@ app.post('/api/tickets/:ticketId/undone', async (req, res) => {
     });
     await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
     res.send(responseJson);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+// Add ticket
+app.post('/api/tickets', async (req, res) => {
+  try {
+    const date = new Date();
+    const ticket = req.body;
+    ticket.creationTime = date.getTime();
+    ticket.id = uuid();
+    const data = await fs.readFile('./data.json');
+    const dataJson = JSON.parse(data);
+    dataJson.push(ticket);
+    await fs.writeFile('./data.json', `${JSON.stringify(dataJson)}`);
+    res.send(dataJson);
   } catch (error) {
     res.send(error);
   }
