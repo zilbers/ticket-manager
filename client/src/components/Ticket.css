@@ -1,6 +1,5 @@
 .ticket {
     background: #d9d9d9dc;
-    font-weight: 600;
     margin-bottom: 10px;
     border-radius: 2%;
     width: 85%;
@@ -19,6 +18,7 @@
 .infoAboutTicket {
     display: flex;
     justify-content: space-between;
+    font-weight: 500;
 }
 
 .labelContainer {
@@ -61,4 +61,5 @@
 
 .header{
     display: flex;
+    font-weight: 600;
 }
