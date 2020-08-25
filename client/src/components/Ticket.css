@@ -44,3 +44,11 @@
     cursor: pointer;
     transform: scale(1.03);
 }
+
+.title{
+    margin-left: 10px;
+}
+
+.title:hover {
+    cursor: pointer;
+}

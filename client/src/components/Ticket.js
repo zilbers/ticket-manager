@@ -30,19 +30,19 @@ function Ticket(props) {
         </IconButton>
       </span>
 
-      <h4 className="title">{ticket.title}</h4>
+      <h4 className="title" onClick={() => setShowBody(!showBody)}>{ticket.title}</h4>
       <div className="body" hidden={showBody}>
         <p className="content">{ticket.content}</p>
-      </div>
-      <div className="infoAboutTicket">
-        <Info
-          userEmail={ticket.userEmail}
-          timeAndDate={props.timeAndDate(ticket.creationTime)}
-        />
-        <div className="labelContainer">
-          {' '}
-          {ticket.labels
+        <div className="infoAboutTicket">
+          <Info
+            userEmail={ticket.userEmail}
+            timeAndDate={props.timeAndDate(ticket.creationTime)}
+          />
+          <div className="labelContainer">
+            {' '}
+            {ticket.labels
             && ticket.labels.map((label) => <Label key={label} label={label} />)}
+          </div>
         </div>
       </div>
     </div>
