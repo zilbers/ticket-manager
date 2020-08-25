@@ -41,7 +41,6 @@ export default function TransitionsModal(props) {
 
   const handleChange = (setter, value) => {
     setter(value);
-    console.log({ userEmail, title, content });
   };
 
   return (
