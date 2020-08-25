@@ -62,4 +62,5 @@
 .header{
     display: flex;
     font-weight: 600;
+    align-items: center;
 }
