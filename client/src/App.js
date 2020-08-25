@@ -61,8 +61,9 @@ function App() {
   // Sends ticket
   async function sendTicket(ticketSent) {
     const result = await axios.post('/api/tickets', ticketSent);
+    console.log(result);
+    setTickets(result.data);
     console.log('sending ticket', ticketSent);
-    setTickets(result);
   }
 
   // Loads the tickets when recieved from server
@@ -71,10 +72,14 @@ function App() {
       const result = await axios.get('/api/tickets');
       console.log('Loading tickets from server: ', result.data);
       setTickets(result.data);
-      setShowingTickets(result.data);
     };
     fetchData();
   }, []);
+
+  // Sets showing tickets when tickets changes
+  useEffect(() => {
+    setShowingTickets(tickets);
+  }, [tickets]);
 
   return (
     <>
