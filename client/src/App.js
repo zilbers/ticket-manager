@@ -7,9 +7,9 @@ import './App.css';
 function App() {
   // Gets ticket from server
   const [tickets, setTickets] = useState();
-  
-    // Array of all the showing tickets
-    const [showingTickets, setShowingTickets] = useState();
+
+  // Array of all the showing tickets
+  const [showingTickets, setShowingTickets] = useState();
 
   // Array of all the hidden tickets
   const [hiddenTickets, setHiddenTickets] = useState([]);

@@ -198,6 +198,18 @@ export default function PrimarySearchAppBar(props) {
             />
           </div>
           <div className={classes.grow} />
+          <IconButton
+            id="restoreHideTickets"
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="restore hidden"
+            onClick={() => props.restoreHidden()}
+          >
+            <Badge badgeContent={props.hiddenTickets.length} color="secondary">
+              <RestoreIcon />
+            </Badge>
+          </IconButton>
           <div id="counters">
             <span id="showingCounter">
               Showing
@@ -218,18 +230,6 @@ export default function PrimarySearchAppBar(props) {
               hidden tickets)
             </span>
           </div>
-          <IconButton
-            id="restoreHideTickets"
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="restore hidden"
-            onClick={() => props.restoreHidden()}
-          >
-            <Badge badgeContent={props.hiddenTickets.length} color="secondary">
-              <RestoreIcon />
-            </Badge>
-          </IconButton>
           <div className={classes.sectionDesktop}>
             {/* <IconButton
               id="restoreHideTickets"

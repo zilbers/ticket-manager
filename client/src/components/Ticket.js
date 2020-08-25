@@ -7,6 +7,7 @@ import './Ticket.css';
 
 function Ticket(props) {
   const [hideButton, setHideButton] = useState(true);
+  const [showBody, setShowBody] = useState(true);
   const { ticket } = props;
 
   return (
@@ -17,10 +18,7 @@ function Ticket(props) {
       onMouseOver={() => setHideButton(false)}
       onFocus={() => setHideButton(false)}
     >
-      <span
-        className="hideTicketButton"
-        hidden={hideButton}
-      >
+      <span className="hideTicketButton" hidden={hideButton}>
         <IconButton
           edge="start"
           color="inherit"
@@ -32,20 +30,19 @@ function Ticket(props) {
         </IconButton>
       </span>
 
-      <div className="body">
-        <h4 className="title">{ticket.title}</h4>
+      <h4 className="title">{ticket.title}</h4>
+      <div className="body" hidden={showBody}>
         <p className="content">{ticket.content}</p>
       </div>
       <div className="infoAboutTicket">
-        <Info userEmail={ticket.userEmail} timeAndDate={props.timeAndDate(ticket.creationTime)} />
+        <Info
+          userEmail={ticket.userEmail}
+          timeAndDate={props.timeAndDate(ticket.creationTime)}
+        />
         <div className="labelContainer">
           {' '}
-          {ticket.labels && ticket.labels.map((label) => (
-            <Label
-              key={label}
-              label={label}
-            />
-          ))}
+          {ticket.labels
+            && ticket.labels.map((label) => <Label key={label} label={label} />)}
         </div>
       </div>
     </div>
