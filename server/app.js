@@ -90,8 +90,9 @@ app.post('/api/tickets', async (req, res) => {
   try {
     const date = new Date();
     const ticket = req.body;
-    ticket.creationTime = date.getTime();
     ticket.id = uuid();
+    ticket.creationTime = date.getTime();
+    console.log(ticket);
     const data = await fs.readFile('./data.json');
     const dataJson = JSON.parse(data);
     dataJson.push(ticket);

@@ -63,7 +63,7 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <form id="addTicketForm" action="/action_page.php" method="post">
+            <form id="addTicketForm" action="/api/tickets" method="post">
               <fieldset id="ticketFieldSet" className={classes.form}>
                 <h3 id="add-ticket-title">Add ticket</h3>
                 <label htmlFor="userEmail">Email:</label>
