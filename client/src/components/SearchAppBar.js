@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
 import RestoreIcon from '@material-ui/icons/Restore';
+import AddCommentModal from './AddCommentModal';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -197,19 +198,6 @@ export default function PrimarySearchAppBar(props) {
               onChange={(e) => props.filterTickets(e.target.value)}
             />
           </div>
-          <div className={classes.grow} />
-          <IconButton
-            id="restoreHideTickets"
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="restore hidden"
-            onClick={() => props.restoreHidden()}
-          >
-            <Badge badgeContent={props.hiddenTickets.length} color="secondary">
-              <RestoreIcon />
-            </Badge>
-          </IconButton>
           <div id="counters">
             <span id="showingCounter">
               Showing
@@ -230,17 +218,22 @@ export default function PrimarySearchAppBar(props) {
               hidden tickets)
             </span>
           </div>
-          <div className={classes.sectionDesktop}>
-            {/* <IconButton
-              id="restoreHideTickets"
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="restore hidden"
-              onClick={() => props.restoreHidden()}
-            >
+
+          <AddCommentModal />
+
+          <IconButton
+            id="restoreHideTickets"
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="restore hidden"
+            onClick={() => props.restoreHidden()}
+          >
+            <Badge badgeContent={props.hiddenTickets.length} color="secondary">
               <RestoreIcon />
-            </IconButton> */}
+            </Badge>
+          </IconButton>
+          <div className={classes.sectionDesktop}>
             {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

@@ -19,8 +19,8 @@ html {
     width: 100%;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 900px) {
   .ticket {
-    width: 1200px;
+    width: 900px;
   }
 }
