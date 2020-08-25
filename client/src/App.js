@@ -7,14 +7,17 @@ import './App.css';
 function App() {
   // Gets ticket from server
   const [tickets, setTickets] = useState();
+  
+    // Array of all the showing tickets
+    const [showingTickets, setShowingTickets] = useState();
 
-  //  Array of all the hidden tickets
+  // Array of all the hidden tickets
   const [hiddenTickets, setHiddenTickets] = useState([]);
 
   // Hides tickets from view
   function hideTicket(ticket) {
     const currentHidden = hiddenTickets.slice();
-    const currentShowing = tickets.slice();
+    const currentShowing = showingTickets.slice();
     currentHidden.push(ticket);
     const index = currentShowing.indexOf(ticket);
     if (index > -1) {
@@ -22,15 +25,14 @@ function App() {
     }
     console.log('Hiding ticket: ', currentHidden);
     setHiddenTickets(currentHidden);
-    setTickets(currentShowing);
+    setShowingTickets(currentShowing);
   }
 
   // Combines hidden and presented tickets
   function restoreHidden() {
     console.log('Rrestoring tickets');
-    const restoredTickets = tickets.concat(hiddenTickets);
     setHiddenTickets([]);
-    setTickets(restoredTickets);
+    setShowingTickets(tickets);
   }
 
   // Translates creation time to date string
@@ -55,6 +57,7 @@ function App() {
       const result = await axios.get('/api/tickets');
       console.log('Loading tickets from server: ', result.data);
       setTickets(result.data);
+      setShowingTickets(result.data);
     };
     fetchData();
   }, []);
@@ -70,7 +73,7 @@ function App() {
         />
       )}
       <main id="ticketsShow">
-        {tickets && tickets.map((ticket) => (
+        {showingTickets && showingTickets.map((ticket) => (
           <Ticket
             key={ticket.id}
             ticket={ticket}
