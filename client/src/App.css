@@ -18,3 +18,9 @@ html {
     justify-content: space-between;
     width: 100%;
 }
+
+@media screen and (min-width: 1200px) {
+  .ticket {
+    width: 1200px;
+  }
+}
