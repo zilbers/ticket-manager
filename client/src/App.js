@@ -58,6 +58,13 @@ function App() {
     console.log('Marked done / undone:', result);
   }
 
+  // Sends ticket
+  async function sendTicket(ticketSent) {
+    const result = await axios.post('/api/tickets', ticketSent);
+    console.log('sending ticket', ticketSent);
+    setTickets(result);
+  }
+
   // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +84,7 @@ function App() {
           tickets={showingTickets}
           filterTickets={(stringFilter) => filterTickets(stringFilter)}
           restoreHidden={restoreHidden}
+          sendTicket={sendTicket}
         />
       )}
       <main id="ticketsShow">

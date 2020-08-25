@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [userEmail, setUserEmail] = React.useState();
+  const [title, setTitle] = React.useState();
+  const [content, setContent] = React.useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -34,6 +37,11 @@ export default function TransitionsModal(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (setter, value) => {
+    setter(value);
+    console.log({ userEmail, title, content });
   };
 
   return (
@@ -63,16 +71,45 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <form id="addTicketForm" action="/api/tickets" method="post">
+
+            <form id="addTicketForm">
               <fieldset id="ticketFieldSet" className={classes.form}>
                 <h3 id="add-ticket-title">Add ticket</h3>
                 <label htmlFor="userEmail">Email:</label>
-                <input type="email" id="userEmail" name="userEmail" />
+                <input
+                  type="email"
+                  id="userEmail"
+                  name="userEmail"
+                  value={userEmail}
+                  onChange={(event) => handleChange(setUserEmail, event.target.value)}
+                />
+
                 <label htmlFor="title">Title:</label>
-                <input type="text" id="title" name="title" />
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={title}
+                  onChange={(event) => handleChange(setTitle, event.target.value)}
+                />
+
                 <label htmlFor="content">Cotent:</label>
-                <textarea name="content" rows="10" cols="50" />
-                <input type="submit" value="Submit" />
+                <textarea
+                  name="content"
+                  rows="10"
+                  cols="50"
+                  value={content}
+                  onChange={(event) => handleChange(setContent, event.target.value)}
+                />
+
+                <input
+                  type="button"
+                  value="submit"
+                  onClick={() => {
+                    handleClose();
+                    props.sendTicket({ userEmail, title, content });
+                  }}
+                />
               </fieldset>
             </form>
           </div>

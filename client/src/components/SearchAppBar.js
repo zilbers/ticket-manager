@@ -219,7 +219,7 @@ export default function PrimarySearchAppBar(props) {
             </span>
           </div>
 
-          <AddCommentModal />
+          <AddCommentModal sendTicket={props.sendTicket} />
 
           <IconButton
             id="restoreHideTickets"

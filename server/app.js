@@ -95,7 +95,7 @@ app.post('/api/tickets', async (req, res) => {
     console.log(ticket);
     const data = await fs.readFile('./data.json');
     const dataJson = JSON.parse(data);
-    dataJson.push(ticket);
+    dataJson.unshift(ticket);
     await fs.writeFile('./data.json', `${JSON.stringify(dataJson)}`);
     res.send(dataJson);
   } catch (error) {
