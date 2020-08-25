@@ -114,7 +114,6 @@ export default function TransitionsModal(props) {
                       || userEmail === ''
                       || title === ''
                       || content === '') {
-                      console.log('empty');
                       alert('Cant send empty!');
                       return;
                     }
