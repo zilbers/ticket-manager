@@ -36,6 +36,9 @@ export default function TransitionsModal(props) {
   };
 
   const handleClose = () => {
+    setUserEmail();
+    setTitle();
+    setContent();
     setOpen(false);
   };
 
@@ -105,6 +108,16 @@ export default function TransitionsModal(props) {
                   type="button"
                   value="submit"
                   onClick={() => {
+                    if (userEmail === undefined
+                      || title === undefined
+                      || content === undefined
+                      || userEmail === ''
+                      || title === ''
+                      || content === '') {
+                      console.log('empty');
+                      alert('Cant send empty!');
+                      return;
+                    }
                     handleClose();
                     props.sendTicket({ userEmail, title, content });
                   }}
