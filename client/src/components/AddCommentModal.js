@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -114,7 +115,7 @@ export default function TransitionsModal(props) {
                       || userEmail === ''
                       || title === ''
                       || content === '') {
-                      alert('Cant send empty!');
+                      alert("Can't send empty!");
                       return;
                     }
                     handleClose();
