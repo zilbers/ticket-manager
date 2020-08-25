@@ -12,3 +12,9 @@ html {
 #counters {
     font-size: 0.7em;
 }
+
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

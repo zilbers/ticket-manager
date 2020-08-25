@@ -169,7 +169,7 @@ export default function PrimarySearchAppBar(props) {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar id="toolbar">
           {/* <IconButton
             edge="start"
             className={classes.menuButton}
