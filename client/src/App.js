@@ -52,6 +52,12 @@ function App() {
     setShowingTickets(result.data);
   }
 
+  // Marks ticket as done
+  async function markDone(ticketId, status) {
+    const result = await axios.post(`/api/tickets/${ticketId}/${status}`);
+    console.log('Marked done / undone:', result);
+  }
+
   // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
@@ -79,6 +85,7 @@ function App() {
             key={ticket.id}
             ticket={ticket}
             hideTicket={hideTicket}
+            markDone={markDone}
             timeAndDate={(creationTime) => timeAndDate(creationTime)}
           />
         ))}

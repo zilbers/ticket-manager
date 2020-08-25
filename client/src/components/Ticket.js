@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'; import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Label from './Label';
 import Info from './Info';
 import './Ticket.css';
@@ -9,6 +10,7 @@ function Ticket(props) {
   const [hideButton, setHideButton] = useState(true);
   const [showBody, setShowBody] = useState(true);
   const { ticket } = props;
+  const [done, setDone] = useState(ticket.done);
 
   return (
     <div
@@ -30,7 +32,22 @@ function Ticket(props) {
         </IconButton>
       </span>
 
-      <h4 className="title" onClick={() => setShowBody(!showBody)}>{ticket.title}</h4>
+      <span className="header">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="done"
+          onClick={() => {
+            props.markDone(ticket.id, done ? 'undone' : 'done');
+            setDone(!done);
+          }}
+        >
+          {done ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+        </IconButton>
+        <div className="title" onClick={() => setShowBody(!showBody)}>
+          {ticket.title}
+        </div>
+      </span>
       <div className="body" hidden={showBody}>
         <p className="content">{ticket.content}</p>
         <div className="infoAboutTicket">

@@ -1,5 +1,6 @@
 .ticket {
     background: #d9d9d9dc;
+    font-weight: 600;
     margin-bottom: 10px;
     border-radius: 2%;
     width: 85%;
@@ -51,4 +52,13 @@
 
 .title:hover {
     cursor: pointer;
+}
+
+.doneButton {
+    display: flex;
+    justify-content: center;
+}
+
+.header{
+    display: flex;
 }
