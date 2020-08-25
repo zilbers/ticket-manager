@@ -49,6 +49,7 @@ function App() {
     console.log(`Filter result by "${searchQuery}": `, result.data);
     setHiddenTickets([]);
     setTickets(result.data);
+    setShowingTickets(result.data);
   }
 
   // Loads the tickets when recieved from server
@@ -64,10 +65,10 @@ function App() {
 
   return (
     <>
-      { tickets && (
+      { showingTickets && (
         <SearchAppBar
           hiddenTickets={hiddenTickets}
-          tickets={tickets}
+          tickets={showingTickets}
           filterTickets={(stringFilter) => filterTickets(stringFilter)}
           restoreHidden={restoreHidden}
         />
