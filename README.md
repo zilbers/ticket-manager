@@ -29,9 +29,3 @@ In this project I created a Ticket Manager Web Application, with React.js and Ex
 
 ## Deployment
 - The app is deployed on glitch:
-
-## Submitting
-1. Before submitting, create a gif demoing your app in action using the testing framework by running the command: `$env:RECORD_TEST='true'; npm run test` in your client folder, this will create a gif file of your UI testing. Note, this may take up to 4min to complete
-1. Open a PR from your work branch to the unchanged main branch (remember to include the generated `ui-testing-recording.gif` file)
-1. Invite `Cyber4sPopo` as a [collaborator](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository) to your repo 👮
-1. Create a Pull Request from the new brunch into master in your duplicated repository
