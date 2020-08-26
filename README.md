@@ -24,6 +24,7 @@ In this project I created a Ticket Manager Web Application, with React.js and Ex
 - Every ticket has hide button with className `hideTicketButton` that will hide the ticket from view. And there is counter with `hideTicketsCounter` className of number of hiding tickets.
 - Every ticket has `markDone` button which marks that certain ticket as done and updates server
 - The app has add ticket button which validates the input and sends it to the backend
+![validation](./readme-files/ticket-validate.gif)
 
 
 ## Deployment
