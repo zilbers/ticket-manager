@@ -22,5 +22,12 @@
     "userEmail": "susjorna@jep.sa",
     "labels": ["Collapse", "Expand"],
     "creationTime": 1517833093439
+  },
+  {
+    "id": "78d09b01-6ca0-5746-82a4-9e02db81552a",
+    "title": "Call a Fullstory function when form submits",
+    "content": "Hi\n\n\nI want to call a Fullstory function (FS.setUserVars) when I submit a form on my Wix page, using data from the form fields. I couldn't find a way to do it using corvid, and the Fullstory app integration is just for the basic tracking code, not for custom user variable recording.\n\n\nThanks!",
+    "userEmail": "bed@voroz.cu",
+    "creationTime": 1515742554251
   }
 ]

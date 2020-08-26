@@ -4,6 +4,7 @@
 process.env.TEST_JSON = './data_test.json';
 const request = require('supertest');
 const full4s = require('@suvelocity/tester');
+const fs = require('fs').promises;
 const app = require('./app');
 const data = require('./data_test.json');
 
@@ -29,11 +30,13 @@ describe(`${projectName} - second test suite`, () => {
   });
 
   test('Can add ticket', async () => {
+    const content = await fs.readFile('./data_test.json');
     const { body } = await request(app)
       .post('/api/tickets/').send(newTicket)
       .expect(200);
 
     expect(body.length).toBe(data.length + 1);
     expect(body[0].title).toBe(newTicket.title);
+    await fs.writeFile('./data_test.json', content);
   });
 });
