@@ -89,7 +89,7 @@ describe(`${projectName} - second test suite`, () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
-      slowMo: 100,
+      slowMo: 50,
     });
     page = await browser.newPage();
     useNock(page, ["http://localhost:3000/api"]);

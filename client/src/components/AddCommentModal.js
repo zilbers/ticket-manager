@@ -55,7 +55,7 @@ export default function TransitionsModal(props) {
   }
 
   function validateInput(text) {
-    return text === undefined || text == "";
+    return text === undefined || text === "";
   }
 
   return (

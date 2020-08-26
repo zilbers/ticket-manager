@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs').promises;
 const { uuid } = require('uuidv4');
 
+const path = process.env.TEST_JSON || './data.json';
+
 const app = express();
 module.exports = app;
 let requestID = 0;
@@ -24,7 +26,7 @@ app.use(logger);
 // Replies with searched tickets
 app.get('/api/tickets', async (req, res) => {
   try {
-    const content = await fs.readFile('./data.json');
+    const content = await fs.readFile(path);
     let json = JSON.parse(content);
     if (req.query.searchText) {
       console.log('Route param: ', req.query);
@@ -43,7 +45,7 @@ app.get('/api/tickets', async (req, res) => {
 // Marks ticket as done
 app.post('/api/tickets/:ticketId/done', async (req, res) => {
   try {
-    const content = await fs.readFile('./data.json');
+    const content = await fs.readFile(path);
     const json = JSON.parse(content);
     const { ticketId } = req.params;
     console.log('Query param: ', req.params);
@@ -53,9 +55,10 @@ app.post('/api/tickets/:ticketId/done', async (req, res) => {
       if (ticket.id === ticketId) {
         json[index].done = true;
         responseJson = json[index];
+        responseJson.updated = true;
       }
     });
-    await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
+    await fs.writeFile(path, `${JSON.stringify(json)}`);
     res.send(responseJson);
   } catch (error) {
     res.send(error);
@@ -65,7 +68,7 @@ app.post('/api/tickets/:ticketId/done', async (req, res) => {
 // Marks ticket as undone
 app.post('/api/tickets/:ticketId/undone', async (req, res) => {
   try {
-    const content = await fs.readFile('./data.json');
+    const content = await fs.readFile(path);
     const json = JSON.parse(content);
     const { ticketId } = req.params;
     console.log('Query param: ', req.params);
@@ -78,7 +81,7 @@ app.post('/api/tickets/:ticketId/undone', async (req, res) => {
         responseJson.updated = true;
       }
     });
-    await fs.writeFile('./data.json', `${JSON.stringify(json)}`);
+    await fs.writeFile(path, `${JSON.stringify(json)}`);
     res.send(responseJson);
   } catch (error) {
     res.send(error);
@@ -93,10 +96,10 @@ app.post('/api/tickets', async (req, res) => {
     ticket.id = uuid();
     ticket.creationTime = date.getTime();
     console.log(ticket);
-    const data = await fs.readFile('./data.json');
+    const data = await fs.readFile(path);
     const dataJson = JSON.parse(data);
     dataJson.unshift(ticket);
-    await fs.writeFile('./data.json', `${JSON.stringify(dataJson)}`);
+    await fs.writeFile(path, `${JSON.stringify(dataJson)}`);
     res.send(dataJson);
   } catch (error) {
     res.send(error);

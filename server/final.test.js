@@ -3,6 +3,7 @@
  */
 const request = require('supertest');
 const full4s = require('@suvelocity/tester');
+const fs = require('fs').promises;
 const app = require('./app');
 const data = require('./data.json');
 
@@ -47,7 +48,8 @@ describe(projectName, () => {
       .expect(200);
 
     expect(body.updated).toBe(true);
-    const updatedData = require('./data.json');
+    const content = await fs.readFile('./data.json');
+    const updatedData = JSON.parse(content);
     expect(updatedData[0].done).toBe(!currentState);
 
     const { body: undoneBody } = await request(app)
@@ -57,7 +59,8 @@ describe(projectName, () => {
       .expect(200);
 
     expect(undoneBody.updated).toBe(true);
-    const updatedData2 = require('./data.json');
+    const content2 = await fs.readFile('./data.json');
+    const updatedData2 = JSON.parse(content2);
     expect(updatedData2[0].done).toBe(currentState);
   });
 });
