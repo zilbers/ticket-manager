@@ -31,6 +31,7 @@ export default function TransitionsModal(props) {
   const [userEmail, setUserEmail] = React.useState();
   const [title, setTitle] = React.useState();
   const [content, setContent] = React.useState();
+  const [error, setErorr] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -41,11 +42,21 @@ export default function TransitionsModal(props) {
     setTitle();
     setContent();
     setOpen(false);
+    setErorr(false)
   };
 
   const handleChange = (setter, value) => {
     setter(value);
   };
+
+  function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function validateInput(text){
+  return (text === undefined)||(text =='');
+}
 
   return (
     <div>
@@ -74,7 +85,7 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-
+            {error&& <span style={{color: "red"}}>Make sure that everything is correct!</span>}
             <form id="addTicketForm">
               <fieldset id="ticketFieldSet" className={classes.form}>
                 <h3 id="add-ticket-title">Add ticket</h3>
@@ -109,13 +120,11 @@ export default function TransitionsModal(props) {
                   type="button"
                   value="submit"
                   onClick={() => {
-                    if (userEmail === undefined
-                      || title === undefined
-                      || content === undefined
-                      || userEmail === ''
-                      || title === ''
-                      || content === '') {
-                      alert("Can't send empty!");
+                    if (!validateEmail(userEmail)
+                      || validateInput(title)
+                      || validateInput(content))
+                      {
+                      setErorr(true)
                       return;
                     }
                     handleClose();
