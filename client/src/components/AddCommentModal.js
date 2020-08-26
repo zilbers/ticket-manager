@@ -117,6 +117,7 @@ export default function TransitionsModal(props) {
 
                 <label htmlFor="content">Cotent:</label>
                 <textarea
+                  id="content"
                   name="content"
                   rows="10"
                   cols="50"
@@ -127,6 +128,7 @@ export default function TransitionsModal(props) {
                 />
 
                 <input
+                  id="submitButton"
                   type="button"
                   value="submit"
                   onClick={() => {
