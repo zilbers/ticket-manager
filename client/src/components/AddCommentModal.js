@@ -1,27 +1,27 @@
 /* eslint-disable no-alert */
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import AddCommentIcon from '@material-ui/icons/AddComment';
-import IconButton from '@material-ui/core/IconButton';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import AddCommentIcon from "@material-ui/icons/AddComment";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
   form: {
-    display: 'flex',
-    border: 'none',
+    display: "flex",
+    border: "none",
   },
 }));
 
@@ -42,7 +42,7 @@ export default function TransitionsModal(props) {
     setTitle();
     setContent();
     setOpen(false);
-    setErorr(false)
+    setErorr(false);
   };
 
   const handleChange = (setter, value) => {
@@ -52,11 +52,11 @@ export default function TransitionsModal(props) {
   function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
-}
+  }
 
-function validateInput(text){
-  return (text === undefined)||(text =='');
-}
+  function validateInput(text) {
+    return text === undefined || text == "";
+  }
 
   return (
     <div>
@@ -85,7 +85,11 @@ function validateInput(text){
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            {error&& <span style={{color: "red"}}>Make sure that everything is correct!</span>}
+            {error && (
+              <span style={{ color: "red" }}>
+                Make sure that everything is correct!
+              </span>
+            )}
             <form id="addTicketForm">
               <fieldset id="ticketFieldSet" className={classes.form}>
                 <h3 id="add-ticket-title">Add ticket</h3>
@@ -95,7 +99,9 @@ function validateInput(text){
                   id="userEmail"
                   name="userEmail"
                   value={userEmail}
-                  onChange={(event) => handleChange(setUserEmail, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setUserEmail, event.target.value)
+                  }
                 />
 
                 <label htmlFor="title">Title:</label>
@@ -104,7 +110,9 @@ function validateInput(text){
                   id="title"
                   name="title"
                   value={title}
-                  onChange={(event) => handleChange(setTitle, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setTitle, event.target.value)
+                  }
                 />
 
                 <label htmlFor="content">Cotent:</label>
@@ -113,18 +121,21 @@ function validateInput(text){
                   rows="10"
                   cols="50"
                   value={content}
-                  onChange={(event) => handleChange(setContent, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setContent, event.target.value)
+                  }
                 />
 
                 <input
                   type="button"
                   value="submit"
                   onClick={() => {
-                    if (!validateEmail(userEmail)
-                      || validateInput(title)
-                      || validateInput(content))
-                      {
-                      setErorr(true)
+                    if (
+                      !validateEmail(userEmail) ||
+                      validateInput(title) ||
+                      validateInput(content)
+                    ) {
+                      setErorr(true);
                       return;
                     }
                     handleClose();
