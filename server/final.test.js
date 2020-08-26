@@ -24,7 +24,6 @@ describe(projectName, () => {
       .get('/api/tickets')
       .expect(200);
 
-    console.log('body', body.length);
     expect(body.length).toBe(data.length);
     expect(body[0].id).toBe(data[0].id);
   });
