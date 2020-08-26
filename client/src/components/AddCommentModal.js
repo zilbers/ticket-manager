@@ -1,27 +1,27 @@
 /* eslint-disable no-alert */
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import AddCommentIcon from "@material-ui/icons/AddComment";
-import IconButton from "@material-ui/core/IconButton";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import AddCommentIcon from '@material-ui/icons/AddComment';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
   form: {
-    display: "flex",
-    border: "none",
+    display: 'flex',
+    border: 'none',
   },
 }));
 
@@ -55,7 +55,7 @@ export default function TransitionsModal(props) {
   }
 
   function validateInput(text) {
-    return text === undefined || text === "";
+    return text === undefined || text === '';
   }
 
   return (
@@ -86,7 +86,7 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             {error && (
-              <span style={{ color: "red" }}>
+              <span style={{ color: 'red' }}>
                 Make sure that everything is correct!
               </span>
             )}
@@ -99,9 +99,7 @@ export default function TransitionsModal(props) {
                   id="userEmail"
                   name="userEmail"
                   value={userEmail}
-                  onChange={(event) =>
-                    handleChange(setUserEmail, event.target.value)
-                  }
+                  onChange={(event) => handleChange(setUserEmail, event.target.value)}
                 />
 
                 <label htmlFor="title">Title:</label>
@@ -110,9 +108,7 @@ export default function TransitionsModal(props) {
                   id="title"
                   name="title"
                   value={title}
-                  onChange={(event) =>
-                    handleChange(setTitle, event.target.value)
-                  }
+                  onChange={(event) => handleChange(setTitle, event.target.value)}
                 />
 
                 <label htmlFor="content">Cotent:</label>
@@ -122,9 +118,7 @@ export default function TransitionsModal(props) {
                   rows="10"
                   cols="50"
                   value={content}
-                  onChange={(event) =>
-                    handleChange(setContent, event.target.value)
-                  }
+                  onChange={(event) => handleChange(setContent, event.target.value)}
                 />
 
                 <input
@@ -133,9 +127,9 @@ export default function TransitionsModal(props) {
                   value="submit"
                   onClick={() => {
                     if (
-                      !validateEmail(userEmail) ||
-                      validateInput(title) ||
-                      validateInput(content)
+                      !validateEmail(userEmail)
+                      || validateInput(title)
+                      || validateInput(content)
                     ) {
                       setErorr(true);
                       return;
