@@ -40,7 +40,7 @@ describe(projectName, () => {
   });
 
   test('Can mark ticket as done and undone', async () => {
-    const currentState = data[0].done;
+    const currentState = data[0].done || false;
     const { body } = await request(app)
       .post(`/api/tickets/${data[0].id}/${currentState ? 'undone' : 'done'}`).query({
         searchText: 'full',
