@@ -30,3 +30,4 @@ In this project I created a Ticket Manager Web Application, with React.js and Ex
 
 ## Deployment
 - The app is deployed on glitch:
+https://zilber-ticket-manager.glitch.me/
