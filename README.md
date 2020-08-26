@@ -8,12 +8,13 @@ In this project I created a Ticket Manager Web Application, with React.js and Ex
 * To run the *client tests* make sure you started the development server on  port 3000 (via the `npm start` script) and then run `npm run test` from client folder
 
 ## Backend
-The Express app located in the path `server/app.js` and exports the `app` object (`module.exports = app;`).
+- The Express app located in the path `server/app.js` and exports the `app` object (`module.exports = app;`).
 - The server runs on port `8080` serve the react app on `http://localhost:8080/` and exposes those API endpoints:
   - [GET] api/tickets - returns an array of tickets from saved in `server/data.json`. If called with query param `searchText` the API will filter only tickets that have a title including a case-insensitive version of the `searchText` param
   - [POST] api/tickets/[:ticketId]/done - Sets `done` property to `true` for the given ticketId
   - [POST] api/tickets/[:ticketId]/undone - Sets `done` property to `false` for the given ticketId
-  - [POST] api/tickets - Adds new ticket to data with unique ID and cration time.
+  - [POST] api/tickets - Adds new ticket to data with unique ID and cration time
+  - Added logger who makes all the work with the backend much easier
 
 ## Client
 - The app title is `Tickets Manager` with a custom `favicon`.
