@@ -31,6 +31,7 @@ export default function TransitionsModal(props) {
   const [userEmail, setUserEmail] = React.useState();
   const [title, setTitle] = React.useState();
   const [content, setContent] = React.useState();
+  const [labels, setLabels] = React.useState();
   const [error, setErorr] = React.useState(false);
 
   const handleOpen = () => {
@@ -41,6 +42,7 @@ export default function TransitionsModal(props) {
     setUserEmail();
     setTitle();
     setContent();
+    setLabels();
     setOpen(false);
     setErorr(false);
   };
@@ -121,6 +123,15 @@ export default function TransitionsModal(props) {
                   onChange={(event) => handleChange(setContent, event.target.value)}
                 />
 
+                <label htmlFor="labels">Labels:</label>
+                <input
+                  type="text"
+                  id="labels"
+                  name="labels"
+                  value={labels}
+                  onChange={(event) => handleChange(setLabels, event.target.value)}
+                />
+
                 <input
                   id="submitButton"
                   type="button"
@@ -135,7 +146,9 @@ export default function TransitionsModal(props) {
                       return;
                     }
                     handleClose();
-                    props.sendTicket({ userEmail, title, content });
+                    props.sendTicket({
+                      userEmail, title, content, labels,
+                    });
                   }}
                 />
               </fieldset>
