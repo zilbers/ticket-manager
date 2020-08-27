@@ -127,4 +127,30 @@ describe(`${projectName} - second test suite`, () => {
     const afterAddingElements = await page.$$('.ticket');
     expect(afterAddingElements.length).toBe(mockDataUpdated.length);
   });
+
+  test('Form validates', async () => {
+    await nock('http://localhost:3000/', { allowUnmocked: true })
+      .get('/api/tickets')
+      .query(() => true)
+      .reply(200, mockData);
+
+    await nock('http://localhost:3000/', { allowUnmocked: true })
+      .post('/api/tickets')
+      .query(() => true)
+      .reply(200, mockDataUpdated);
+
+    await page.goto('http://localhost:3000/', { waitUntil: 'networkidle0' });
+
+    const elements = await page.$$('.ticket');
+    expect(elements.length).toBe(mockData.length);
+
+    await page.click('#addTicket');
+    await page.type('#userEmail', newTicket.title);
+    await page.type('#title', '');
+    await page.type('#content', '');
+    await page.click('#submitButton');
+    const formError = await page.$('#formError');
+    const formErrorText = await (await formError.getProperty('innerText')).jsonValue();
+    expect(formErrorText).toBe('Make sure that everything is correct!');
+  });
 });

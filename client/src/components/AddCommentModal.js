@@ -88,7 +88,7 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             {error && (
-              <span style={{ color: 'red' }}>
+              <span id="formError" style={{ color: 'red' }}>
                 Make sure that everything is correct!
               </span>
             )}
