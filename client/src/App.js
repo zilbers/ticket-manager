@@ -58,7 +58,7 @@ function App() {
     console.log('Marked done / undone:', result);
   }
 
-  // Sends ticket
+  // Sends a new ticket to database
   async function sendTicket(ticketSent) {
     ticketSent.labels = ticketSent.labels.replace(/,/g, '');
     ticketSent.labels = ticketSent.labels.replace(/\s\s+/g, ' ');
