@@ -76,7 +76,7 @@ const newTicket = {
   content: 'Content test',
   userEmail: 'test@test.com',
   creationTime: 1514809791415,
-  labels: ['Corvid', 'Api'],
+  labels: 'labels test',
 };
 
 let page;
