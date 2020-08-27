@@ -87,7 +87,9 @@ jest.setTimeout(30000);
 const projectName = '1.Ticket Manager UI';
 describe(`${projectName} - second test suite`, () => {
   beforeAll(async () => {
-    browser = await puppeteer.launch({ });
+    browser = await puppeteer.launch({
+      slowMo: 50,
+    });
     page = await browser.newPage();
     useNock(page, ['http://localhost:3000/api']);
 
