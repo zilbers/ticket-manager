@@ -63,19 +63,19 @@ export default function TransitionsModal(props) {
   return (
     <div>
       <IconButton
-        id="addTicket"
-        edge="start"
+        id='addTicket'
+        edge='start'
         className={classes.menuButton}
-        color="inherit"
-        aria-label="add ticket"
+        color='inherit'
+        aria-label='add ticket'
         onClick={handleOpen}
       >
         <AddCommentIcon />
       </IconButton>
 
       <Modal
-        aria-labelledby="add-comment-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby='add-comment-title'
+        aria-describedby='transition-modal-description'
         className={classes.modal}
         open={open}
         onClose={handleClose}
@@ -88,66 +88,78 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             {error && (
-              <span id="formError" style={{ color: 'red' }}>
+              <span id='formError' style={{ color: 'red' }}>
                 Make sure that everything is correct!
               </span>
             )}
-            <form id="addTicketForm">
-              <fieldset id="ticketFieldSet" className={classes.form}>
-                <h3 id="add-ticket-title">Add ticket</h3>
-                <label htmlFor="userEmail">Email:</label>
+            <form id='addTicketForm'>
+              <fieldset id='ticketFieldSet' className={classes.form}>
+                <h3 id='add-ticket-title'>Add ticket</h3>
+                <label htmlFor='userEmail'>Email:</label>
                 <input
-                  type="email"
-                  id="userEmail"
-                  name="userEmail"
+                  type='email'
+                  id='userEmail'
+                  name='userEmail'
                   value={userEmail}
-                  onChange={(event) => handleChange(setUserEmail, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setUserEmail, event.target.value)
+                  }
                 />
 
-                <label htmlFor="title">Title:</label>
+                <label htmlFor='title'>Title:</label>
                 <input
-                  type="text"
-                  id="title"
-                  name="title"
+                  type='text'
+                  id='title'
+                  name='title'
                   value={title}
-                  onChange={(event) => handleChange(setTitle, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setTitle, event.target.value)
+                  }
                 />
 
-                <label htmlFor="content">Cotent:</label>
+                <label htmlFor='content'>Cotent:</label>
                 <textarea
-                  id="content"
-                  name="content"
-                  rows="10"
-                  cols="50"
+                  id='content'
+                  name='content'
+                  rows='10'
+                  cols='50'
                   value={content}
-                  onChange={(event) => handleChange(setContent, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setContent, event.target.value)
+                  }
                 />
 
-                <label htmlFor="labels">Labels:</label>
+                <label htmlFor='labels'>Labels:</label>
                 <input
-                  type="text"
-                  id="labels"
-                  name="labels"
+                  type='text'
+                  id='labels'
+                  name='labels'
                   value={labels}
-                  onChange={(event) => handleChange(setLabels, event.target.value)}
+                  onChange={(event) =>
+                    handleChange(setLabels, event.target.value)
+                  }
                 />
 
                 <input
-                  id="submitButton"
-                  type="button"
-                  value="submit"
-                  onClick={() => {
+                  id='submitButton'
+                  type='button'
+                  value='submit'
+                  onClick={(event) => {
+                    event.preventDefault();
                     if (
-                      !validateEmail(userEmail)
-                      || validateInput(title)
-                      || validateInput(content)
+                      !validateEmail(userEmail) ||
+                      validateInput(title) ||
+                      validateInput(content)
                     ) {
                       setErorr(true);
                       return;
                     }
                     handleClose();
                     props.sendTicket({
-                      userEmail, title, content, labels,
+                      userEmail,
+                      title,
+                      content,
+                      labels,
                     });
                   }}
                 />
