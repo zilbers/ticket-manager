@@ -108,8 +108,11 @@ export default function TransitionsModal(props) {
             <form id='addTicketForm'>
               <fieldset id='ticketFieldSet' className={classes.form}>
                 <h3 id='add-ticket-title'>Add ticket</h3>
-                <label htmlFor='userEmail'>Email:</label>
+                <label htmlFor='userEmail' className='formItem'>
+                  Email:
+                </label>
                 <input
+                  className='formItem'
                   type='email'
                   id='userEmail'
                   name='userEmail'
@@ -119,8 +122,11 @@ export default function TransitionsModal(props) {
                   }
                 />
 
-                <label htmlFor='title'>Title:</label>
+                <label htmlFor='title' className='formItem'>
+                  Title:
+                </label>
                 <input
+                  className='formItem'
                   type='text'
                   id='title'
                   name='title'
@@ -130,8 +136,11 @@ export default function TransitionsModal(props) {
                   }
                 />
 
-                <label htmlFor='content'>Cotent:</label>
+                <label htmlFor='content' className='formItem'>
+                  Cotent:
+                </label>
                 <textarea
+                  className='formItem'
                   id='content'
                   name='content'
                   rows='10'
@@ -143,7 +152,9 @@ export default function TransitionsModal(props) {
                 />
 
                 <span>
-                  <label htmlFor='labels'>Labels:</label>
+                  <label htmlFor='labels' className='formItem'>
+                    Labels:
+                  </label>
                   {labels.map((label) => (
                     <span key={label} className='labelsForm'>
                       {label}
@@ -152,16 +163,23 @@ export default function TransitionsModal(props) {
                 </span>
                 <span id='spanLabels'>
                   <input
+                    className='formItem'
                     type='text'
                     id='labels'
                     name='labels'
                     value={addLabel}
                     onChange={(event) => setAddLabel(event.target.value)}
                   />
-                  <button onClick={(event) => addToLabels(event)}>Add</button>
+                  <button
+                    className='formItem'
+                    onClick={(event) => addToLabels(event)}
+                  >
+                    Add
+                  </button>
                 </span>
 
                 <input
+                  className='formItem'
                   id='submitButton'
                   type='button'
                   value='submit'

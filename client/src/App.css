@@ -20,7 +20,38 @@ html {
 }
 
 .labelsForm{
-  margin: 0rem 1rem;
+    color: #ffffff;
+    background: #e63946;
+    border-radius: 15%;
+    padding: 3px;
+    margin-right: 10px;
+}
+
+.formItem {
+  margin: 0.4rem;
+}
+
+button.formItem {
+  padding: 3px;
+  font-size: 0.9rem;
+}
+
+input.formItem {
+  padding: 3px;
+  font-size: 0.9rem;
+}
+
+button.formItem:hover{
+cursor: pointer;
+}
+
+#submitButton:hover{
+cursor: pointer;
+}
+
+#addTicketForm {
+      background: #457b9d3f;
+      padding: 5px;
 }
 
 @media screen and (min-width: 900px) {
