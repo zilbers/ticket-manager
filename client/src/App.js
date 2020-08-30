@@ -45,7 +45,9 @@ function App() {
 
   // Filters the showing tickets
   async function filterTickets(searchQuery) {
-    const result = await axios.get(`/api/tickets?searchText=${searchQuery}`).then((res) => res);
+    const result = await axios
+      .get(`/api/tickets?searchText=${searchQuery}`)
+      .then((res) => res);
     console.log(`Filter result by "${searchQuery}": `, result.data);
     setHiddenTickets([]);
     setTickets(result.data);
@@ -60,11 +62,11 @@ function App() {
 
   // Sends a new ticket to database
   async function sendTicket(ticketSent) {
-    if (ticketSent.labels) {
-      ticketSent.labels = ticketSent.labels.replace(/,/g, '');
-      ticketSent.labels = ticketSent.labels.replace(/\s\s+/g, ' ');
-      ticketSent.labels = ticketSent.labels.split(' ');
-    }
+    // if (ticketSent.labels) {
+    //   ticketSent.labels = ticketSent.labels.replace(/,/g, '');
+    //   ticketSent.labels = ticketSent.labels.replace(/\s\s+/g, ' ');
+    //   ticketSent.labels = ticketSent.labels.split(' ');
+    // }
     const result = await axios.post('/api/tickets', ticketSent);
     console.log(result);
     setTickets(result.data);
@@ -88,7 +90,7 @@ function App() {
 
   return (
     <>
-      { showingTickets && (
+      {showingTickets && (
         <SearchAppBar
           hiddenTickets={hiddenTickets}
           tickets={showingTickets}
@@ -97,16 +99,17 @@ function App() {
           sendTicket={sendTicket}
         />
       )}
-      <main id="ticketsShow">
-        {showingTickets && showingTickets.map((ticket) => (
-          <Ticket
-            key={ticket.id}
-            ticket={ticket}
-            hideTicket={hideTicket}
-            markDone={markDone}
-            timeAndDate={(creationTime) => timeAndDate(creationTime)}
-          />
-        ))}
+      <main id='ticketsShow'>
+        {showingTickets &&
+          showingTickets.map((ticket) => (
+            <Ticket
+              key={ticket.id}
+              ticket={ticket}
+              hideTicket={hideTicket}
+              markDone={markDone}
+              timeAndDate={(creationTime) => timeAndDate(creationTime)}
+            />
+          ))}
       </main>
     </>
   );

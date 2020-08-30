@@ -28,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState();
-  const [title, setTitle] = React.useState();
-  const [content, setContent] = React.useState();
-  const [labels, setLabels] = React.useState();
+  const [userEmail, setUserEmail] = React.useState('');
+  const [title, setTitle] = React.useState('');
+  const [content, setContent] = React.useState('');
+  const [labels, setLabels] = React.useState([]);
+  const [addLabel, setAddLabel] = React.useState('');
   const [error, setErorr] = React.useState(false);
 
   const handleOpen = () => {
@@ -39,10 +40,11 @@ export default function TransitionsModal(props) {
   };
 
   const handleClose = () => {
-    setUserEmail();
-    setTitle();
-    setContent();
-    setLabels();
+    setUserEmail('');
+    setTitle('');
+    setContent('');
+    setAddLabel('');
+    setLabels([]);
     setOpen(false);
     setErorr(false);
   };
@@ -58,6 +60,17 @@ export default function TransitionsModal(props) {
 
   function validateInput(text) {
     return text === undefined || text === '';
+  }
+
+  function addToLabels(event) {
+    event.preventDefault();
+    let newLabels = labels.slice();
+    console.log(newLabels, labels);
+    if (!(addLabel === undefined || addLabel === '')) {
+      newLabels.push(addLabel);
+      setLabels(newLabels);
+      setAddLabel('');
+    }
   }
 
   return (
@@ -129,16 +142,24 @@ export default function TransitionsModal(props) {
                   }
                 />
 
-                <label htmlFor='labels'>Labels:</label>
-                <input
-                  type='text'
-                  id='labels'
-                  name='labels'
-                  value={labels}
-                  onChange={(event) =>
-                    handleChange(setLabels, event.target.value)
-                  }
-                />
+                <span>
+                  <label htmlFor='labels'>Labels:</label>
+                  {labels.map((label) => (
+                    <span key={label} className='labelsForm'>
+                      {label}
+                    </span>
+                  ))}
+                </span>
+                <span id='spanLabels'>
+                  <input
+                    type='text'
+                    id='labels'
+                    name='labels'
+                    value={addLabel}
+                    onChange={(event) => setAddLabel(event.target.value)}
+                  />
+                  <button onClick={(event) => addToLabels(event)}>Add</button>
+                </span>
 
                 <input
                   id='submitButton'

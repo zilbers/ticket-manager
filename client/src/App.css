@@ -19,6 +19,10 @@ html {
     width: 100%;
 }
 
+.labelsForm{
+  margin: 0rem 1rem;
+}
+
 @media screen and (min-width: 900px) {
   .ticket {
     width: 900px;
