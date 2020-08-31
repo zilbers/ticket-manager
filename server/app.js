@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs').promises;
+const { readFileSync } = require('fs');
 const { uuid } = require('uuidv4');
 
 const path = process.env.TEST_JSON || './data.json';
@@ -42,41 +43,18 @@ app.get('/api/tickets', async (req, res) => {
   }
 });
 
-// Marks ticket as done
-app.post('/api/tickets/:ticketId/done', async (req, res) => {
+// Marks ticket as done or undone
+app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
   try {
     const content = await fs.readFile(path);
     const json = JSON.parse(content);
-    const { ticketId } = req.params;
+    const { ticketId, isDone } = req.params;
     console.log('Query param: ', req.params);
-    console.log('Done', true);
+    console.log('Changing to', isDone);
     let responseJson;
     json.forEach((ticket, index) => {
       if (ticket.id === ticketId) {
-        json[index].done = true;
-        responseJson = json[index];
-        responseJson.updated = true;
-      }
-    });
-    await fs.writeFile(path, `${JSON.stringify(json)}`);
-    res.send(responseJson);
-  } catch (error) {
-    res.send(error);
-  }
-});
-
-// Marks ticket as undone
-app.post('/api/tickets/:ticketId/undone', async (req, res) => {
-  try {
-    const content = await fs.readFile(path);
-    const json = JSON.parse(content);
-    const { ticketId } = req.params;
-    console.log('Query param: ', req.params);
-    console.log('Done', false);
-    let responseJson;
-    json.forEach((ticket, index) => {
-      if (ticket.id === ticketId) {
-        json[index].done = false;
+        json[index].done = isDone === 'done';
         responseJson = json[index];
         responseJson.updated = true;
       }
@@ -96,7 +74,7 @@ app.post('/api/tickets', async (req, res) => {
     ticket.id = uuid();
     ticket.creationTime = date.getTime();
     console.log(ticket);
-    const data = await fs.readFile(path);
+    const data = readFileSync(path);
     const dataJson = JSON.parse(data);
     dataJson.unshift(ticket);
     await fs.writeFile(path, `${JSON.stringify(dataJson)}`);
