@@ -50,15 +50,14 @@ app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
     const json = JSON.parse(content);
     const { ticketId, isDone } = req.params;
     console.log('Query param: ', req.params);
-    console.log('Changing to', isDone);
+    console.log('Changing to:', isDone);
     let responseJson;
-    json.forEach((ticket, index) => {
-      if (ticket.id === ticketId) {
-        json[index].done = isDone === 'done';
-        responseJson = json[index];
-        responseJson.updated = true;
-      }
-    });
+    const ticketIndex = json.findIndex((ticket) => ticket.id === ticketId);
+    if (ticketIndex !== -1) {
+      json[ticketIndex].done = isDone === 'done';
+      responseJson = json[ticketIndex];
+      responseJson.updated = true;
+    }
     await fs.writeFile(path, `${JSON.stringify(json)}`);
     res.send(responseJson);
   } catch (error) {
