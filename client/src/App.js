@@ -62,11 +62,6 @@ function App() {
 
   // Sends a new ticket to database
   async function sendTicket(ticketSent) {
-    // if (ticketSent.labels) {
-    //   ticketSent.labels = ticketSent.labels.replace(/,/g, '');
-    //   ticketSent.labels = ticketSent.labels.replace(/\s\s+/g, ' ');
-    //   ticketSent.labels = ticketSent.labels.split(' ');
-    // }
     const result = await axios.post('/api/tickets', ticketSent);
     console.log(result);
     setTickets(result.data);

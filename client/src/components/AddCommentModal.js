@@ -161,7 +161,8 @@ export default function TransitionsModal(props) {
                     </span>
                   ))}
                 </span>
-                <span id='spanLabels'>
+
+                <span>
                   <input
                     className='formItem'
                     type='text'
