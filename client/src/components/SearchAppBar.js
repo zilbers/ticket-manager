@@ -138,16 +138,16 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label='show 4 new mails' color='inherit'>
+          <Badge badgeContent={4} color='secondary'>
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label='show 11 new notifications' color='inherit'>
+          <Badge badgeContent={11} color='secondary'>
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -155,10 +155,10 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
+          aria-label='account of current user'
+          aria-controls='primary-search-account-menu'
+          aria-haspopup='true'
+          color='inherit'
         >
           <AccountCircle />
         </IconButton>
@@ -169,8 +169,8 @@ export default function PrimarySearchAppBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar id="toolbar">
+      <AppBar position='static'>
+        <Toolbar id='toolbar'>
           {/* <IconButton
             edge="start"
             className={classes.menuButton}
@@ -179,57 +179,47 @@ export default function PrimarySearchAppBar(props) {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography className={classes.title} variant="h6" noWrap>
-            Tickets - Manager
-            {' '}
+          <Typography className={classes.title} variant='h6' noWrap>
+            Tickets - Manager{' '}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
-              id="searchInput"
+              id='searchInput'
               onChange={(e) => props.filterTickets(e.target.value)}
             />
           </div>
-          <div id="counters">
-            <span id="showingCounter">
-              Showing
-              {' '}
-              <span id="showTicketsCounter">
-                {props.tickets.length}
-              </span>
-              {' '}
-              results
-              {' '}
+          <div id='counters'>
+            <span id='showingCounter'>
+              Showing{' '}
+              <span id='showTicketsCounter'>{props.tickets.length}</span>{' '}
+              results{' '}
             </span>
-            <span id="hiddenCounter">
-              (
-              <span id="hideTicketsCounter">
-                {props.hiddenTickets.length}
-              </span>
-              {' '}
+            <span id='hiddenCounter'>
+              (<span id='hideTicketsCounter'>{props.hiddenTickets.length}</span>{' '}
               hidden tickets)
             </span>
           </div>
 
-          <AddCommentModal id="addTicket" sendTicket={props.sendTicket} />
+          <AddCommentModal id='addTicket' sendTicket={props.sendTicket} />
 
           <IconButton
-            id="restoreHideTickets"
-            edge="start"
+            id='restoreHideTickets'
+            edge='start'
             className={classes.menuButton}
-            color="inherit"
-            aria-label="restore hidden"
+            color='inherit'
+            aria-label='restore hidden'
             onClick={() => props.restoreHidden()}
           >
-            <Badge badgeContent={props.hiddenTickets.length} color="secondary">
+            <Badge badgeContent={props.hiddenTickets.length} color='secondary'>
               <RestoreIcon />
             </Badge>
           </IconButton>

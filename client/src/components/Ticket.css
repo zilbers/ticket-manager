@@ -18,8 +18,9 @@
 .infoAboutTicket {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     font-weight: 300;
-    margin: 0 3rem;
+    margin: 0.5rem 3rem;
 }
 
 .labelContainer {
