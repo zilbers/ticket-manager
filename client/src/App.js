@@ -45,35 +45,37 @@ function App() {
 
   // Filters the showing tickets
   async function filterTickets(searchQuery) {
-    const result = await axios
-      .get(`/api/tickets?searchText=${searchQuery}`)
-      .then((res) => res);
-    console.log(`Filter result by "${searchQuery}": `, result.data);
-    setHiddenTickets([]);
-    setTickets(result.data);
-    setShowingTickets(result.data);
+    axios.get(`/api/tickets?searchText=${searchQuery}`).then((result) => {
+      console.log(`Filter result by "${searchQuery}": `, result.data);
+      setHiddenTickets([]);
+      setTickets(result.data);
+      setShowingTickets(result.data);
+    });
   }
 
   // Marks ticket as done
   async function markDone(ticketId, status) {
-    const result = await axios.post(`/api/tickets/${ticketId}/${status}`);
-    console.log('Marked done / undone:', result);
+    axios.post(`/api/tickets/${ticketId}/${status}`).then((result) => {
+      console.log('Marked done / undone:', result);
+    });
   }
 
   // Sends a new ticket to database
   async function sendTicket(ticketSent) {
-    const result = await axios.post('/api/tickets', ticketSent);
-    console.log(result);
-    setTickets(result.data);
-    console.log('sending ticket', ticketSent);
+    axios.post('/api/tickets', ticketSent).then((result) => {
+      console.log(result);
+      setTickets(result.data);
+      console.log('sending ticket', ticketSent);
+    });
   }
 
   // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/api/tickets');
-      console.log('Loading tickets from server: ', result.data);
-      setTickets(result.data);
+      axios.get('/api/tickets').then((result) => {
+        console.log('Loading tickets from server: ', result.data);
+        setTickets(result.data);
+      });
     };
     fetchData();
   }, []);

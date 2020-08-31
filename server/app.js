@@ -14,10 +14,9 @@ app.use('/', express.static('../client/build/'));
 
 // Logger that describes activity on the server
 function logger(req, res, next) {
-  console.log(`
-Request #${requestID}
-Request fired: ${req.url} 
-Method: ${req.method}`);
+  console.log(
+    `Request #${requestID}\nRequest fired: ${req.url}\nMethod: ${req.method}`
+  );
   requestID += 1;
   next();
 }
@@ -60,7 +59,7 @@ app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
     writeFileSync(path, `${JSON.stringify(json)}`);
     res.send(responseJson);
   } catch (error) {
-    res.send(error);
+    res.status(401).send('Cant find');
   }
 });
 
@@ -78,6 +77,6 @@ app.post('/api/tickets', async (req, res) => {
     writeFileSync(path, `${JSON.stringify(dataJson)}`);
     res.send(dataJson);
   } catch (error) {
-    res.send(error);
+    res.status(500).send('Cant upload new ticket');
   }
 });
