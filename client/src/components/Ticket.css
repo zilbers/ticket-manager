@@ -12,13 +12,14 @@
 }
 
 .content {
-    overflow: hidden
+    white-space: pre-wrap ;
 }
 
 .infoAboutTicket {
     display: flex;
     justify-content: space-between;
-    font-weight: 500;
+    font-weight: 300;
+    margin: 0 3rem;
 }
 
 .labelContainer {
