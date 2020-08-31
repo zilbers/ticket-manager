@@ -1,6 +1,5 @@
 const express = require('express');
-const fs = require('fs').promises;
-const { readFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { uuid } = require('uuidv4');
 
 const path = process.env.TEST_JSON || './data.json';
@@ -27,7 +26,7 @@ app.use(logger);
 // Replies with searched tickets
 app.get('/api/tickets', async (req, res) => {
   try {
-    const content = await fs.readFile(path);
+    const content = readFileSync(path);
     let json = JSON.parse(content);
     if (req.query.searchText) {
       console.log('Route param: ', req.query);
@@ -46,7 +45,7 @@ app.get('/api/tickets', async (req, res) => {
 // Marks ticket as done or undone
 app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
   try {
-    const content = await fs.readFile(path);
+    const content = readFileSync(path);
     const json = JSON.parse(content);
     const { ticketId, isDone } = req.params;
     console.log('Query param: ', req.params);
@@ -58,7 +57,7 @@ app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
       responseJson = json[ticketIndex];
       responseJson.updated = true;
     }
-    await fs.writeFile(path, `${JSON.stringify(json)}`);
+    writeFileSync(path, `${JSON.stringify(json)}`);
     res.send(responseJson);
   } catch (error) {
     res.send(error);
@@ -76,7 +75,7 @@ app.post('/api/tickets', async (req, res) => {
     const data = readFileSync(path);
     const dataJson = JSON.parse(data);
     dataJson.unshift(ticket);
-    readFileSync(path, `${JSON.stringify(dataJson)}`);
+    writeFileSync(path, `${JSON.stringify(dataJson)}`);
     res.send(dataJson);
   } catch (error) {
     res.send(error);
