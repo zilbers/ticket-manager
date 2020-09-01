@@ -37,7 +37,7 @@ app.get('/api/tickets', async (req, res) => {
     }
     res.send(json);
   } catch (error) {
-    res.send(error);
+    res.status(401).send('Cant find tickets that fits with filter');
   }
 });
 
