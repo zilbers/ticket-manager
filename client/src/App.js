@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { get, post, update } from './services/axios_service';
 import Ticket from './components/Ticket';
 import SearchAppBar from './components/SearchAppBar';
 import './App.css';
@@ -45,7 +45,7 @@ function App() {
 
   // Filters the showing tickets
   async function filterTickets(searchQuery) {
-    axios.get(`/api/tickets?searchText=${searchQuery}`).then((result) => {
+    get(`?searchText=${searchQuery}`).then((result) => {
       console.log(`Filter result by "${searchQuery}": `, result.data);
       setHiddenTickets([]);
       setTickets(result.data);
@@ -55,14 +55,14 @@ function App() {
 
   // Marks ticket as done
   async function markDone(ticketId, status) {
-    axios.post(`/api/tickets/${ticketId}/${status}`).then((result) => {
+    update(ticketId, status).then((result) => {
       console.log('Marked done / undone:', result);
     });
   }
 
   // Sends a new ticket to database
   async function sendTicket(ticketSent) {
-    axios.post('/api/tickets', ticketSent).then((result) => {
+    post(ticketSent).then((result) => {
       console.log(result);
       setTickets(result.data);
       console.log('sending ticket', ticketSent);
@@ -72,7 +72,7 @@ function App() {
   // Loads the tickets when recieved from server
   useEffect(() => {
     const fetchData = async () => {
-      axios.get('/api/tickets').then((result) => {
+      get().then((result) => {
         console.log('Loading tickets from server: ', result.data);
         setTickets(result.data);
       });

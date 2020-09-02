@@ -15,7 +15,7 @@ app.use('/', express.static('../client/build/'));
 // Logger that describes activity on the server
 function logger(req, res, next) {
   console.log(
-    `Request #${requestID}\nRequest fired: ${req.url}\nMethod: ${req.method}`
+    `Request #${requestID}\nRequest fired: ${req.url}\nMethod: ${req.method}`,
   );
   requestID += 1;
   next();
@@ -42,7 +42,7 @@ app.get('/api/tickets', async (req, res) => {
 });
 
 // Marks ticket as done or undone
-app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
+app.put('/api/tickets/:ticketId/:isDone', async (req, res) => {
   try {
     const content = readFileSync(path);
     const json = JSON.parse(content);
