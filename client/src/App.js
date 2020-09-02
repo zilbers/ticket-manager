@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { get, post, update, query } from './services/axios_service';
+import { get, post, update } from './services/axios_service';
 import Ticket from './components/Ticket';
 import SearchAppBar from './components/SearchAppBar';
 import './App.css';
@@ -45,7 +45,7 @@ function App() {
 
   // Filters the showing tickets
   async function filterTickets(searchQuery) {
-    query(searchQuery).then((result) => {
+    get(searchQuery).then((result) => {
       console.log(`Filter result by "${searchQuery}": `, result.data);
       setHiddenTickets([]);
       setTickets(result.data);
