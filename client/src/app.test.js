@@ -85,7 +85,7 @@ let encoder;
 
 jest.setTimeout(30000);
 const projectName = '1.Ticket Manager UI';
-describe(`${projectName} - second test suite`, () => {
+describe(`${projectName} - second test suite, checks added features`, () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       slowMo: 50,
