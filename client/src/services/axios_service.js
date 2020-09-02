@@ -13,7 +13,7 @@ function post(newObject) {
 }
 
 function update(id, theUpdate) {
-  return axios.put(`${baseUrl}/${id}/${theUpdate}`);
+  return axios.post(`${baseUrl}/${id}/${theUpdate}`);
 }
 
 export { get, post, update };

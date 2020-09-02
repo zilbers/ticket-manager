@@ -42,7 +42,7 @@ app.get('/api/tickets', async (req, res) => {
 });
 
 // Marks ticket as done or undone
-app.put('/api/tickets/:ticketId/:isDone', async (req, res) => {
+app.post('/api/tickets/:ticketId/:isDone', async (req, res) => {
   try {
     const content = readFileSync(path);
     const json = JSON.parse(content);
