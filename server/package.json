@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuidv4": "^6.2.3"
   },
   "devDependencies": {
     "@suvelocity/tester": "^1.0.2",
@@ -16,6 +18,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   },
   "keywords": [],

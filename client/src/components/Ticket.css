@@ -1,0 +1,68 @@
+.ticket {
+    background: #d9d9d9dc;
+    margin-bottom: 10px;
+    border-radius: 2%;
+    width: 85%;
+    overflow: hidden
+}
+
+.body {
+    background: #ffffffc0;
+    padding: 2px;
+}
+
+.content {
+    white-space: pre-wrap ;
+}
+
+.infoAboutTicket {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: 300;
+    margin: 0.5rem 3rem;
+}
+
+.labelContainer {
+    display: flex;
+}
+
+.label{
+    color: #ffffff;
+    background: #e63946;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border-radius: 15%;
+    padding: 3px;
+    margin-right: 10px;
+}
+
+.hideTicketButton {
+    margin-right: 5px;
+    float: right;
+}
+
+.hideTicketButton:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+}
+
+.title{
+    margin-left: 10px;
+}
+
+.title:hover {
+    cursor: pointer;
+} 
+
+.doneButton {
+    display: flex;
+    justify-content: center;
+}
+
+.header{
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+}
