@@ -73,15 +73,18 @@ export default function TransitionsModal(props) {
         aria-labelledby='add-comment-title'
         aria-describedby='transition-modal-description'
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={props.openModal}
+        onClose={() => {
+          handleClose();
+          props.handleMenuClose();
+        }}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={props.openModal}>
           <div className={classes.paper}>
             {error && (
               <span id='formError' style={{ color: 'red' }}>

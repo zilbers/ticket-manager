@@ -158,14 +158,21 @@ export default function PrimarySearchAppBar(props) {
         </IconButton>
         <p>Restore</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem
+        id='addTicket'
+        onClick={() => {
+          setOpenModal((openModal) => {
+            console.log('opening modal');
+            handleMenuClose();
+            return !openModal;
+          });
+        }}
+      >
         <IconButton
-          id='addTicket'
           edge='start'
           className={classes.menuButton}
           color='inherit'
           aria-label='add ticket'
-          onClick={() => setOpenModal((openModal) => !openModal)}
         >
           <AddCommentIcon />
         </IconButton>
@@ -173,7 +180,7 @@ export default function PrimarySearchAppBar(props) {
           openModal={openModal}
           setOpenModal={setOpenModal}
           sendTicket={props.sendTicket}
-          onClick={handleMenuClose}
+          handleMenuClose={handleMenuClose}
         />
         <p>Add ticket</p>
       </MenuItem>
