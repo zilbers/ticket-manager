@@ -8,7 +8,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
@@ -114,6 +114,7 @@ export default function PrimarySearchAppBar(props) {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
+      position="static"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
       keepMounted
@@ -130,20 +131,27 @@ export default function PrimarySearchAppBar(props) {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'center', horizontal: 'left' }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label='show 4 new mails' color='inherit'>
-          <Badge badgeContent={4} color='secondary'>
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+            <IconButton
+            id='restoreHideTickets'
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='restore hidden'
+            onClick={() => props.restoreHidden()}
+          >
+            <Badge badgeContent={props.hiddenTickets.length} color='secondary'>
+              <RestoreIcon />
+            </Badge>
+          </IconButton>
+        <p>Restore</p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label='show 11 new notifications' color='inherit'>
@@ -171,6 +179,18 @@ export default function PrimarySearchAppBar(props) {
     <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar id='toolbar'>
+          <IconButton
+            id='menuButton'
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='restore hidden'
+            onClick={() =>
+              setMobileMoreAnchorEl((mobileMoreAnchorEl) => !mobileMoreAnchorEl)
+            }
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
             Tickets - Manager{' '}
           </Typography>
