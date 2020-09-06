@@ -7,7 +7,7 @@ import Info from './Info';
 import './Ticket.css';
 
 function Ticket(props) {
-  const [hideButton, setHideButton] = useState(true);
+  const [hideButton, setHideButton] = useState(false);
   const [showBody, setShowBody] = useState(false);
   const { ticket } = props;
   const [done, setDone] = useState(ticket.done);
@@ -15,22 +15,24 @@ function Ticket(props) {
   return (
     <div
       className='ticket'
-      onMouseEnter={() => setHideButton(false)}
-      onMouseLeave={() => setHideButton(true)}
-      onMouseOver={() => setHideButton(false)}
-      onFocus={() => setHideButton(false)}
+      onMouseEnter={() => setHideButton(true)}
+      onMouseOver={() => setHideButton(true)}
+      onFocus={() => setHideButton(true)}
+      onMouseLeave={() => setHideButton(false)}
     >
-      <span className='hideTicketButton' hidden={hideButton}>
-        <IconButton
-          edge='start'
-          color='inherit'
-          aria-label='hide ticket'
-          className='hideTicketButton'
-          onClick={() => props.hideTicket(ticket)}
-        >
-          <CloseIcon />
-        </IconButton>
-      </span>
+      {hideButton && (
+        <span className='hideTicketButton'>
+          <IconButton
+            edge='start'
+            color='inherit'
+            aria-label='hide ticket'
+            className='hideTicketButton'
+            onClick={() => props.hideTicket(ticket)}
+          >
+            <CloseIcon />
+          </IconButton>
+        </span>
+      )}
 
       <span className='header'>
         <IconButton
