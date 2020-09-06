@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import AddCommentIcon from '@material-ui/icons/AddComment';
-import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(props.openModal);
   const [userEmail, setUserEmail] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
@@ -35,17 +33,13 @@ export default function TransitionsModal(props) {
   const [addLabel, setAddLabel] = React.useState('');
   const [error, setErorr] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setUserEmail('');
     setTitle('');
     setContent('');
     setAddLabel('');
     setLabels([]);
-    setOpen(false);
+    props.setOpenModal(false);
     setErorr(false);
   };
 
@@ -75,17 +69,6 @@ export default function TransitionsModal(props) {
 
   return (
     <div>
-      <IconButton
-        id='addTicket'
-        edge='start'
-        className={classes.menuButton}
-        color='inherit'
-        aria-label='add ticket'
-        onClick={handleOpen}
-      >
-        <AddCommentIcon />
-      </IconButton>
-
       <Modal
         aria-labelledby='add-comment-title'
         aria-describedby='transition-modal-description'

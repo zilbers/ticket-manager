@@ -16,6 +16,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
 import RestoreIcon from '@material-ui/icons/Restore';
 import AddCommentModal from './AddCommentModal';
+import AddCommentIcon from '@material-ui/icons/AddComment';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,6 +90,7 @@ export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [openModal, setOpenModal] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -106,15 +108,14 @@ export default function PrimarySearchAppBar(props) {
     handleMobileMenuClose();
   };
 
-  //   const handleMobileMenuOpen = (event) => {
-  //     setMobileMoreAnchorEl(event.currentTarget);
-  //   };
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      position="static"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
       keepMounted
@@ -131,35 +132,50 @@ export default function PrimarySearchAppBar(props) {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'center', horizontal: 'left' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-            <IconButton
-            id='restoreHideTickets'
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='restore hidden'
-            onClick={() => props.restoreHidden()}
-          >
-            <Badge badgeContent={props.hiddenTickets.length} color='secondary'>
-              <RestoreIcon />
-            </Badge>
-          </IconButton>
+      <MenuItem
+        id='restoreHideTickets'
+        onClick={() => {
+          props.restoreHidden();
+          handleMenuClose();
+        }}
+      >
+        <IconButton
+          edge='start'
+          className={classes.menuButton}
+          color='inherit'
+          aria-label='restore hidden'
+        >
+          <Badge badgeContent={props.hiddenTickets.length} color='secondary'>
+            <RestoreIcon />
+          </Badge>
+        </IconButton>
         <p>Restore</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label='show 11 new notifications' color='inherit'>
-          <Badge badgeContent={11} color='secondary'>
-            <NotificationsIcon />
-          </Badge>
+        <IconButton
+          id='addTicket'
+          edge='start'
+          className={classes.menuButton}
+          color='inherit'
+          aria-label='add ticket'
+          onClick={() => setOpenModal((openModal) => !openModal)}
+        >
+          <AddCommentIcon />
         </IconButton>
-        <p>Notifications</p>
+        <AddCommentModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          sendTicket={props.sendTicket}
+          onClick={handleMenuClose}
+        />
+        <p>Add ticket</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -185,9 +201,7 @@ export default function PrimarySearchAppBar(props) {
             className={classes.menuButton}
             color='inherit'
             aria-label='restore hidden'
-            onClick={() =>
-              setMobileMoreAnchorEl((mobileMoreAnchorEl) => !mobileMoreAnchorEl)
-            }
+            onClick={handleMobileMenuOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -221,7 +235,7 @@ export default function PrimarySearchAppBar(props) {
             </span>
           </div>
 
-          <AddCommentModal id='addTicket' sendTicket={props.sendTicket} />
+          {/* <AddCommentModal id='addTicket' sendTicket={props.sendTicket} /> */}
 
           <IconButton
             id='restoreHideTickets'
