@@ -8,7 +8,7 @@ import './Ticket.css';
 
 function Ticket(props) {
   const [hideButton, setHideButton] = useState(true);
-  const [showBody, setShowBody] = useState(true);
+  const [showBody, setShowBody] = useState(false);
   const { ticket } = props;
   const [done, setDone] = useState(ticket.done);
 
@@ -39,18 +39,23 @@ function Ticket(props) {
           aria-label='done'
           onClick={() => {
             props.markDone(ticket.id, done ? 'undone' : 'done');
-            setDone(!done);
+            setDone((done) => !done);
           }}
         >
           {done ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
         </IconButton>
-        <div className='title' onClick={() => setShowBody(!showBody)}>
+        <div
+          className='title'
+          onClick={() => setShowBody((showBody) => !showBody)}
+        >
           {ticket.title}
         </div>
       </span>
-      <div className='body' hidden={showBody}>
-        <p className='content'>{ticket.content}</p>
-      </div>
+      {showBody && (
+        <div className='body'>
+          <p className='content'>{ticket.content}</p>
+        </div>
+      )}
       <div className='infoAboutTicket'>
         <Info
           userEmail={ticket.userEmail}
